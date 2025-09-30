@@ -1,13 +1,11 @@
 // ======= Generate Numbers =======
-function generateNumbers(containerId, digit) {
+function generateNumbers(containerId, maxNumber, digit) {
   const container = document.getElementById(containerId);
-  if (!container) return;
   container.innerHTML = '';
 
-  let max = digit === 2 ? 99 : 999;
-
+  // Repeat numbers multiple times for scrolling effect
   for (let cycle = 0; cycle < 10; cycle++) {
-    for (let i = 0; i <= max; i++) {
+    for (let i = 0; i <= maxNumber; i++) {
       const div = document.createElement('div');
       div.className = 'number-item';
       div.textContent = i.toString().padStart(digit, '0');
@@ -19,52 +17,55 @@ function generateNumbers(containerId, digit) {
 // ======= Scroll Animation =======
 function startScroll(containerId, duration) {
   const container = document.getElementById(containerId);
-  if (!container) return;
-
   container.style.transition = `transform ${duration}s linear`;
   container.style.transform = `translateY(-${container.scrollHeight / 10}px)`; // scroll one cycle
 }
 
 // ======= Stop & Highlight =======
-function stopScroll(containerId, fixedNumber, digit) {
+function stopScroll(containerId, finalNumber, digit) {
   const container = document.getElementById(containerId);
-  if (!container) return;
-
   container.style.transition = 'transform 0.5s ease-out';
-  const height = 80; // approximate item height
-  const position = fixedNumber * height;
+  const itemHeight = container.querySelector('.number-item').offsetHeight || 80;
+  const position = finalNumber * itemHeight;
   container.style.transform = `translateY(-${position}px)`;
 
   // Highlight the stopped number
   const items = container.getElementsByClassName('number-item');
   for (let item of items) item.classList.remove('highlight');
-  if (items[fixedNumber]) items[fixedNumber].classList.add('highlight');
+  if (items[finalNumber]) items[finalNumber].classList.add('highlight');
 
-  // Save in history
+  // Add to history
   const now = new Date();
   const resultList = document.getElementById('resultHistory');
-  if (resultList) {
-    const li = document.createElement('li');
-    li.textContent = `${now.toLocaleTimeString('hi-IN', { hour12: false })} - ${digit}-Digit: ${fixedNumber.toString().padStart(digit, '0')}`;
-    resultList.prepend(li);
-  }
+  const li = document.createElement('li');
+  li.textContent = `${now.toLocaleTimeString([], { hour12: false })} - ${digit}-Digit: ${finalNumber.toString().padStart(digit, '0')}`;
+  resultList.prepend(li);
 }
 
-// ======= Initialize =======
+// ======= Initialize Lottery =======
 window.addEventListener('load', () => {
-  generateNumbers('scroll-2digit', 2);
-  generateNumbers('scroll-3digit', 3);
+
+  // Generate numbers
+  generateNumbers('scroll-1digit', 9, 1);   // 1D
+  generateNumbers('scroll-2digit', 99, 2);  // 2D
+  generateNumbers('scroll-3digit', 999, 3); // 3D
 
   // Auto-scroll example
-  startScroll('scroll-2digit', 10);
-  startScroll('scroll-3digit', 15);
+  startScroll('scroll-1digit', 8);  // 1D scroll
+  startScroll('scroll-2digit', 12); // 2D scroll
+  startScroll('scroll-3digit', 15); // 3D scroll
 
-  // Stop after some seconds
+  // Stop numbers after some delay (example)
+  setTimeout(() => {
+    stopScroll('scroll-1digit', Math.floor(Math.random() * 10), 1);
+  }, 9000);
+
   setTimeout(() => {
     stopScroll('scroll-2digit', Math.floor(Math.random() * 100), 2);
-  }, 12000);
+  }, 13000);
 
   setTimeout(() => {
     stopScroll('scroll-3digit', Math.floor(Math.random() * 1000), 3);
   }, 18000);
+
 });
