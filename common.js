@@ -1,26 +1,26 @@
-// common.js
 
-// ======= Clock (user system time) =======
+// ======= Clock =======
 function updateClock() {
-  const clock = document.getElementById("clock");
-  if (!clock) return;
-
+  const clock = document.getElementById('clock');
   const now = new Date();
-  const timeString = now.toLocaleTimeString("en-GB", { hour12: false });
+  // Automatically use user's system timezone
+  const timeString = now.toLocaleTimeString([], { hour12: false });
   clock.textContent = timeString;
 }
-
-// हर सेकंड update करें
 setInterval(updateClock, 1000);
 updateClock();
 
-// ======= Balance Example =======
-function updateBalance(amount = 0) {
-  const balance = document.getElementById("userBalance");
-  if (!balance) return;
-
-  balance.textContent = amount;
+// ======= User Balance =======
+let userBalance = 1000; // starting balance
+const userBalanceSpan = document.getElementById('userBalance');
+function updateBalance() {
+  userBalanceSpan.textContent = userBalance;
 }
+updateBalance();
 
-// Initialize example balance
-updateBalance(500); // Start with 500 coins
+// Function to add/subtract balance (example)
+function changeBalance(amount) {
+  userBalance += amount;
+  if (userBalance < 0) userBalance = 0;
+  updateBalance();
+}
