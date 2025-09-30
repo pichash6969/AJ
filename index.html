@@ -7,13 +7,14 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Navigation -->
+
+  <!-- Navbar -->
   <nav>
-  <a href="index.html">🏠 Home</a>
-  <a href="betting.html">🎲 Betting</a>
-  <a href="login.html">🔑 Login/Signup</a>
-  <a href="balance.html">💰 Balance</a>
-  <a href="history.html">📜 History</a>
+    <a href="index.html">🏠 Home</a>
+    <a href="betting.html">🎲 Betting</a>
+    <a href="login.html">🔑 Login/Signup</a>
+    <a href="balance.html">💰 Balance</a>
+    <a href="history.html">📜 History</a>
   </nav>
 
   <!-- Clock -->
@@ -26,19 +27,11 @@
     Balance: <span id="userBalance">0</span> coins
   </div>
 
-  <!-- Lottery Area -->
+  <!-- Lottery Section -->
   <div class="lottery-container">
     <h2>🎰 Virtual Lottery 🎰</h2>
 
-    <!-- 1-Digit Draw -->
-    <div class="number-section">
-      <h3>1 TO 10x</h3>
-      <div class="scroll-container">
-        <div class="scroll-numbers" id="scroll-1digit"></div>
-      </div>
-    </div>
-
-    <!-- 2-Digit Draw -->
+    <!-- 2-Digit -->
     <div class="number-section">
       <h3>1 TO 100x</h3>
       <div class="scroll-container">
@@ -46,7 +39,7 @@
       </div>
     </div>
 
-    <!-- 3-Digit Draw -->
+    <!-- 3-Digit -->
     <div class="number-section">
       <h3>1 TO 1000x</h3>
       <div class="scroll-container">
@@ -61,8 +54,9 @@
     <ul id="resultHistory"></ul>
   </div>
 
-  <!-- Scripts -->
+  <!-- JS -->
+  <script src="common.js"></script>
   <script src="script.js"></script>
-  <script src="user.js"></script>
+
 </body>
 </html>
