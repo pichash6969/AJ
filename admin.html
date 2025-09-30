@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Lottery</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>🎛️ Admin Panel</h1>
+  </header>
+
+  <div class="admin-container">
+    <h2>Set Lottery Schedule</h2>
+    
+    <div class="schedule-box">
+      <label>Digit:</label>
+      <select id="adminDigit">
+        <option value="1">1D</option>
+        <option value="2">2D</option>
+        <option value="3">3D</option>
+      </select>
+
+      <label>Start Time (HH:MM:SS):</label>
+      <input type="time" id="startTime" step="1">
+
+      <label>Stop Time (HH:MM:SS):</label>
+      <input type="time" id="stopTime" step="1">
+
+      <button id="setSchedule">Set Schedule</button>
+    </div>
+
+    <h3>Current Schedule</h3>
+    <ul id="scheduleList"></ul>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
