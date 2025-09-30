@@ -8,6 +8,11 @@
 </head>
 <body>
 
+  <!-- Header -->
+  <header class="site-header">
+    <h1>🎰 Virtual Lottery 🎰</h1>
+  </header>
+
   <!-- Navbar -->
   <nav>
     <a href="index.html">🏠 Home</a>
@@ -27,13 +32,20 @@
     Balance: <span id="userBalance">0</span> coins
   </div>
 
-  <!-- Lottery Section -->
+  <!-- Lottery Sections -->
   <div class="lottery-container">
-    <h2>🎰 Virtual Lottery 🎰</h2>
+
+    <!-- 1-Digit -->
+    <div class="number-section">
+      <h3>1 To 10x</h3>
+      <div class="scroll-container">
+        <div class="scroll-numbers" id="scroll-1digit"></div>
+      </div>
+    </div>
 
     <!-- 2-Digit -->
     <div class="number-section">
-      <h3>1 TO 100x</h3>
+      <h3>1 To 100x</h3>
       <div class="scroll-container">
         <div class="scroll-numbers" id="scroll-2digit"></div>
       </div>
@@ -41,11 +53,12 @@
 
     <!-- 3-Digit -->
     <div class="number-section">
-      <h3>1 TO 1000x</h3>
+      <h3>1 To 1000x</h3>
       <div class="scroll-container">
         <div class="scroll-numbers" id="scroll-3digit"></div>
       </div>
     </div>
+
   </div>
 
   <!-- Result History -->
