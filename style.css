@@ -1,7 +1,7 @@
-/* --- Google Font का इस्तेमाल --- */
+/* --- Google Font --- */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto+Mono:wght@500&display=swap');
 
-/* --- सामान्य स्टाइल (पूरे पेज के लिए) --- */
+/* --- सामान्य स्टाइल --- */
 * {
   margin: 0;
   padding: 0;
@@ -10,25 +10,25 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #1a1a2e; /* गहरा नीला बैकग्राउंड */
-  color: #e0e0e0; /* हल्का टेक्स्ट रंग */
+  background-color: #1a1a2e;
+  color: #e0e0e0;
   line-height: 1.6;
   padding: 0 10px;
 }
 
 h1, h2, h3 {
-  color: #fca311; /* हेडिंग के लिए आकर्षक पीला रंग */
+  color: #fca311;
   margin-bottom: 1rem;
   text-align: center;
 }
 
-/* --- नेविगेशन बार (Menu) --- */
+/* --- Navigation Bar --- */
 nav {
   background-color: #162447;
   padding: 1rem 0.5rem;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap; /* मोबाइल पर लाइन ब्रेक */
+  flex-wrap: wrap;
   gap: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   margin-bottom: 2rem;
@@ -52,7 +52,7 @@ nav a:hover {
   transform: translateY(-2px);
 }
 
-/* --- घड़ी और बैलेंस सेक्शन --- */
+/* --- Clock और Balance --- */
 .clock-container {
   margin: 1.5rem 0;
 }
@@ -80,7 +80,7 @@ nav a:hover {
   color: #fca311;
 }
 
-/* --- लॉटरी का मुख्य एरिया --- */
+/* --- Lottery Section --- */
 .lottery-container {
   display: flex;
   justify-content: center;
@@ -123,7 +123,7 @@ nav a:hover {
   text-shadow: 0 0 8px #4caf50;
 }
 
-/* --- रिजल्ट हिस्ट्री --- */
+/* --- Result History --- */
 .history-container {
   max-width: 600px;
   margin: 2rem auto;
@@ -153,7 +153,7 @@ nav a:hover {
   background-color: rgba(26, 26, 46, 0.7);
 }
 
-/* --- कस्टम स्क्रॉलबार --- */
+/* --- Custom Scrollbar --- */
 #resultHistory::-webkit-scrollbar {
   width: 7px;
 }
