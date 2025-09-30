@@ -2,11 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto+Mono:wght@500&display=swap');
 
 /* --- General --- */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 body {
   font-family: 'Poppins', sans-serif;
   background-color: #1a1a2e;
@@ -14,34 +10,29 @@ body {
   line-height: 1.6;
   padding: 0 10px;
 }
-
 h1, h2, h3 {
   color: #fca311;
   text-align: center;
   margin-bottom: 1rem;
 }
 
-/* --- Header --- */
-.site-header h1 {
-  font-size: 2.5rem;
-  letter-spacing: 2px;
-  margin: 1rem 0;
+/* --- Header + Navbar --- */
+.site-header {
+  margin-bottom: 1rem;
 }
 
-/* --- Navbar --- */
-nav {
-  background-color: #162447;
-  padding: 1rem 0.5rem;
+.header-nav {
   display: flex;
   justify-content: center;
   gap: 15px;
-  flex-wrap: wrap; /* mobile friendly */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  flex-wrap: nowrap; /* हमेशा एक row में रहे */
+  background-color: #162447;
+  padding: 0.8rem 0.5rem;
   border-radius: 8px;
-  margin-bottom: 2rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
-nav a {
+.header-nav a {
   color: #ffffff;
   text-decoration: none;
   font-size: 1rem;
@@ -52,14 +43,21 @@ nav a {
   white-space: nowrap;
 }
 
-nav a:hover {
+.header-nav a:hover {
   background-color: #fca311;
   color: #162447;
   transform: translateY(-2px);
 }
 
+/* Lottery Title */
+.lottery-title {
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  margin: 0.8rem 0 1.5rem 0;
+}
+
 /* --- Clock & Balance --- */
-.clock-container { margin: 1.5rem 0; }
+.clock-container { margin: 1rem 0; }
 #clock {
   font-family: 'Roboto Mono', monospace;
   font-size: 4rem;
@@ -67,7 +65,7 @@ nav a:hover {
   text-align: center;
 }
 .balance-box {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255,255,255,0.05);
   border: 1px solid #fca311;
   border-radius: 10px;
   padding: 0.8rem;
@@ -91,7 +89,7 @@ nav a:hover {
   background-color: #162447;
   padding: 1.2rem;
   border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
   flex-basis: 280px;
   flex-grow: 1;
   text-align: center;
@@ -120,7 +118,7 @@ nav a:hover {
   padding: 1.5rem;
   background-color: #162447;
   border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
 }
 #resultHistory {
   list-style-type: none;
@@ -133,9 +131,7 @@ nav a:hover {
   border-bottom: 1px solid #3a3a5e;
 }
 #resultHistory li:last-child { border-bottom: none; }
-#resultHistory li:nth-child(even) {
-  background-color: rgba(26,26,46,0.7);
-}
+#resultHistory li:nth-child(even) { background-color: rgba(26,26,46,0.7); }
 #resultHistory::-webkit-scrollbar { width: 7px; }
 #resultHistory::-webkit-scrollbar-track { background: #1a1a2e; }
 #resultHistory::-webkit-scrollbar-thumb { background-color: #fca311; border-radius: 10px; }
@@ -145,12 +141,10 @@ nav a:hover {
   #clock { font-size: 2.8rem; }
   .lottery-container { flex-direction: column; align-items: center; gap: 1rem; }
   .number-section { width: 95%; max-width: 380px; }
-  nav { gap: 10px; padding: 0.8rem; }
-  nav a { font-size: 0.95rem; padding: 6px 12px; }
+  .header-nav a { font-size: 0.95rem; padding: 6px 12px; }
 }
+
 @media (max-width: 480px) {
-  nav { flex-direction: column; align-items: stretch; }
-  nav a { width: 100%; text-align: center; }
   #clock { font-size: 2.2rem; }
   .scroll-container { font-size: 2.5rem; height: 70px; }
 }
