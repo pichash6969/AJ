@@ -1,69 +1,91 @@
-// --- Clock Function ---
+// ======= Clock =======
 function updateClock() {
+  const clock = document.getElementById("clock");
   const now = new Date();
-  const timeString = now.toLocaleTimeString("en-GB", { hour12: false });
-  document.getElementById("clock").textContent = timeString;
+  const timeString = now.toLocaleTimeString("hi-IN", { hour12: false });
+  clock.textContent = timeString;
 }
 setInterval(updateClock, 1000);
 updateClock();
 
-// --- Balance System ---
-function loadBalance() {
-  let balance = localStorage.getItem("userBalance");
-  if (!balance) {
-    balance = 1000; // default balance
-    localStorage.setItem("userBalance", balance);
+// ======= Generate Numbers =======
+function generateNumbers(containerId, digit) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
+
+  let max = Math.pow(10, digit) - 1; // max value (e.g. 9, 99, 999)
+
+  // Repeat numbers multiple times for smooth scrolling effect
+  for (let cycle = 0; cycle < 5; cycle++) {
+    for (let i = 0; i <= max; i++) {
+      const div = document.createElement("div");
+      div.className = "number-item";
+      div.textContent = i.toString().padStart(digit, "0");
+      container.appendChild(div);
+    }
   }
-  document.getElementById("userBalance").textContent = balance;
-}
-function updateBalance(amount) {
-  let balance = parseInt(localStorage.getItem("userBalance")) || 0;
-  balance += amount;
-  localStorage.setItem("userBalance", balance);
-  document.getElementById("userBalance").textContent = balance;
-}
-loadBalance();
-
-// --- Lottery Number Generator ---
-function getRandomNumber(digits) {
-  let max = Math.pow(10, digits) - 1;
-  let number = Math.floor(Math.random() * (max + 1));
-  return number.toString().padStart(digits, "0"); // leading zeros
 }
 
-function showRandomNumbers() {
-  const n1 = getRandomNumber(1);
-  const n2 = getRandomNumber(2);
-  const n3 = getRandomNumber(3);
-
-  document.getElementById("scroll-1digit").textContent = n1;
-  document.getElementById("scroll-2digit").textContent = n2;
-  document.getElementById("scroll-3digit").textContent = n3;
-
-  saveResult(`${n1} | ${n2} | ${n3}`);
+// ======= Scroll Animation =======
+function startScroll(containerId, duration) {
+  const container = document.getElementById(containerId);
+  container.style.transition = `transform ${duration}s linear`;
+  container.style.transform = `translateY(-${container.scrollHeight / 2}px)`; // scroll half cycle for effect
 }
 
-// --- Result History ---
-function saveResult(result) {
-  let history = JSON.parse(localStorage.getItem("resultHistory")) || [];
-  history.unshift({ result, time: new Date().toLocaleTimeString() });
-  if (history.length > 20) history.pop(); // केवल 20 result तक
-  localStorage.setItem("resultHistory", JSON.stringify(history));
-  renderHistory();
+// ======= Stop & Highlight =======
+function stopScroll(containerId, fixedNumber, digit) {
+  const container = document.getElementById(containerId);
+  container.style.transition = "transform 0.5s ease-out";
+
+  // हर item की dynamic height निकालें
+  const items = container.getElementsByClassName("number-item");
+  if (items.length === 0) return;
+
+  const itemHeight = items[0].offsetHeight; // auto detect height
+  const position = fixedNumber * itemHeight;
+
+  container.style.transform = `translateY(-${position}px)`;
+
+  // Highlight current number
+  for (let item of items) item.classList.remove("highlight");
+  const index = fixedNumber % items.length;
+  if (items[index]) items[index].classList.add("highlight");
+
+  // Save in history (max 15 entries)
+  const now = new Date();
+  const resultList = document.getElementById("resultHistory");
+  const li = document.createElement("li");
+  li.textContent = `${now.toLocaleTimeString("hi-IN", { hour12: false })} → ${digit}-Digit: ${fixedNumber
+    .toString()
+    .padStart(digit, "0")}`;
+  resultList.prepend(li);
+  while (resultList.children.length > 15) {
+    resultList.removeChild(resultList.lastChild);
+  }
 }
 
-function renderHistory() {
-  let history = JSON.parse(localStorage.getItem("resultHistory")) || [];
-  const list = document.getElementById("resultHistory");
-  list.innerHTML = "";
-  history.forEach(item => {
-    const li = document.createElement("li");
-    li.textContent = `${item.time} → ${item.result}`;
-    list.appendChild(li);
-  });
-}
-renderHistory();
+// ======= Initialize =======
+window.addEventListener("load", () => {
+  generateNumbers("scroll-1digit", 1);
+  generateNumbers("scroll-2digit", 2);
+  generateNumbers("scroll-3digit", 3);
 
-// --- Auto Generate Result हर 10 सेकंड में ---
-setInterval(showRandomNumbers, 10000);
-showRandomNumbers();
+  // Example auto-scroll
+  startScroll("scroll-1digit", 6);
+  startScroll("scroll-2digit", 10);
+  startScroll("scroll-3digit", 14);
+
+  // Stop automatically with random results
+  setTimeout(() => {
+    stopScroll("scroll-1digit", Math.floor(Math.random() * 10), 1);
+  }, 7000);
+
+  setTimeout(() => {
+    stopScroll("scroll-2digit", Math.floor(Math.random() * 100), 2);
+  }, 12000);
+
+  setTimeout(() => {
+    stopScroll("scroll-3digit", Math.floor(Math.random() * 1000), 3);
+  }, 18000);
+});
