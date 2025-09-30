@@ -1,71 +1,84 @@
-// ======= Generate Numbers =======
+// User Balance
+let userBalance = 1000;
+
+function changeBalance(amount) {
+  userBalance += amount;
+  document.getElementById('userBalance').textContent = userBalance;
+}
+
+// Clock
+function updateClock() {
+  const clock = document.getElementById('clock');
+  const now = new Date();
+  clock.textContent = now.toLocaleTimeString('hi-IN', { hour12:false });
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// Generate numbers
 function generateNumbers(containerId, maxNumber, digit) {
   const container = document.getElementById(containerId);
   container.innerHTML = '';
-
-  // Repeat numbers multiple times for scrolling effect
-  for (let cycle = 0; cycle < 10; cycle++) {
-    for (let i = 0; i <= maxNumber; i++) {
+  for(let cycle=0; cycle<10; cycle++){
+    for(let i=0;i<=maxNumber;i++){
       const div = document.createElement('div');
-      div.className = 'number-item';
-      div.textContent = i.toString().padStart(digit, '0');
+      div.className='number-item';
+      div.textContent=i.toString().padStart(digit,'0');
       container.appendChild(div);
     }
   }
 }
 
-// ======= Scroll Animation =======
-function startScroll(containerId, duration) {
+// Scroll
+function startScroll(containerId, duration){
   const container = document.getElementById(containerId);
   container.style.transition = `transform ${duration}s linear`;
-  container.style.transform = `translateY(-${container.scrollHeight / 10}px)`; // scroll one cycle
+  container.style.transform = `translateY(-${container.scrollHeight/10}px)`;
 }
 
-// ======= Stop & Highlight =======
-function stopScroll(containerId, finalNumber, digit) {
+// Stop & highlight
+function stopScroll(containerId, finalNumber, digit){
   const container = document.getElementById(containerId);
   container.style.transition = 'transform 0.5s ease-out';
   const itemHeight = container.querySelector('.number-item').offsetHeight || 80;
   const position = finalNumber * itemHeight;
   container.style.transform = `translateY(-${position}px)`;
 
-  // Highlight the stopped number
   const items = container.getElementsByClassName('number-item');
-  for (let item of items) item.classList.remove('highlight');
-  if (items[finalNumber]) items[finalNumber].classList.add('highlight');
+  for(let item of items) item.classList.remove('highlight');
+  if(items[finalNumber]) items[finalNumber].classList.add('highlight');
 
-  // Add to history
+  // History
   const now = new Date();
-  const resultList = document.getElementById('resultHistory');
   const li = document.createElement('li');
-  li.textContent = `${now.toLocaleTimeString([], { hour12: false })} - ${digit}-Digit: ${finalNumber.toString().padStart(digit, '0')}`;
-  resultList.prepend(li);
+  li.textContent=`${now.toLocaleTimeString([],{hour12:false})} - ${digit}-Digit: ${finalNumber.toString().padStart(digit,'0')}`;
+  document.getElementById('resultHistory').prepend(li);
+
+  return finalNumber;
 }
 
-// ======= Initialize Lottery =======
-window.addEventListener('load', () => {
+// Schedules (fetched from admin, example)
+let schedules = [
+  // {digit:1, startTime:"00:00:05", stopTime:"00:00:10"} Example
+];
 
-  // Generate numbers
-  generateNumbers('scroll-1digit', 9, 1);   // 1D
-  generateNumbers('scroll-2digit', 99, 2);  // 2D
-  generateNumbers('scroll-3digit', 999, 3); // 3D
+// Auto check every second
+setInterval(()=>{
+  const now = new Date();
+  const hhmmss = now.toTimeString().slice(0,8);
+  schedules.forEach(sch=>{
+    const containerId = sch.digit===1?'scroll-1digit':sch.digit===2?'scroll-2digit':'scroll-3digit';
+    const maxNumber = sch.digit===1?9:sch.digit===2?99:999;
 
-  // Auto-scroll example
-  startScroll('scroll-1digit', 8);  // 1D scroll
-  startScroll('scroll-2digit', 12); // 2D scroll
-  startScroll('scroll-3digit', 15); // 3D scroll
+    if(hhmmss===sch.startTime){
+      generateNumbers(containerId,maxNumber,sch.digit);
+      startScroll(containerId,5);
+      console.log(`${sch.digit}D Lottery Started at ${hhmmss}`);
+    }
 
-  // Stop numbers after some delay (example)
-  setTimeout(() => {
-    stopScroll('scroll-1digit', Math.floor(Math.random() * 10), 1);
-  }, 9000);
-
-  setTimeout(() => {
-    stopScroll('scroll-2digit', Math.floor(Math.random() * 100), 2);
-  }, 13000);
-
-  setTimeout(() => {
-    stopScroll('scroll-3digit', Math.floor(Math.random() * 1000), 3);
-  }, 18000);
-
-});
+    if(hhmmss===sch.stopTime){
+      const result = stopScroll(containerId,Math.floor(Math.random()*(maxNumber+1)),sch.digit);
+      console.log(`${sch.digit}D Lottery Stopped at ${hhmmss} Result:${result}`);
+    }
+  });
+},1000);
