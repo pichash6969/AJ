@@ -10,44 +10,61 @@ body {
   line-height: 1.6;
   padding: 0 10px;
 }
-h1, h2, h3 {
-  color: #fca311;
-  text-align: center;
-  margin-bottom: 1rem;
-}
+h1, h2, h3 { color: #fca311; text-align: center; margin-bottom: 1rem; }
 
 /* --- Header + Navbar --- */
-.site-header {
-  margin-bottom: 1rem;
-}
-
 .header-nav {
   display: flex;
-  justify-content: center;
-  gap: 15px;
-  flex-wrap: nowrap; /* हमेशा एक row में रहे */
+  justify-content: space-between;
+  align-items: center;
   background-color: #162447;
-  padding: 0.8rem 0.5rem;
+  padding: 0.8rem 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  flex-wrap: nowrap;
 }
 
-.header-nav a {
-  color: #ffffff;
+.nav-left a {
+  color: #fff;
   text-decoration: none;
-  font-size: 1rem;
   font-weight: 600;
-  padding: 8px 14px;
+  padding: 8px 12px;
   border-radius: 6px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  white-space: nowrap;
+  transition: background 0.3s;
+  margin-right: 10px;
 }
+.nav-left a:hover { background-color: #fca311; color: #162447; }
 
-.header-nav a:hover {
-  background-color: #fca311;
-  color: #162447;
-  transform: translateY(-2px);
+/* Hamburger Menu */
+.hamburger-menu { position: relative; }
+#menu-toggle {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.6rem;
+  cursor: pointer;
 }
+.menu-links {
+  display: none;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: #162447;
+  border-radius: 8px;
+  padding: 0.5rem 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  flex-direction: column;
+  min-width: 150px;
+  z-index: 10;
+}
+.menu-links a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 16px;
+}
+.menu-links a:hover { background-color: #fca311; color: #162447; }
+.menu-links.show { display: flex; flex-direction: column; }
 
 /* Lottery Title */
 .lottery-title {
@@ -58,93 +75,35 @@ h1, h2, h3 {
 
 /* --- Clock & Balance --- */
 .clock-container { margin: 1rem 0; }
-#clock {
-  font-family: 'Roboto Mono', monospace;
-  font-size: 4rem;
-  text-shadow: 0 0 15px #fca311;
-  text-align: center;
-}
-.balance-box {
-  background-color: rgba(255,255,255,0.05);
-  border: 1px solid #fca311;
-  border-radius: 10px;
-  padding: 0.8rem;
-  max-width: 320px;
-  margin: 0 auto 2rem auto;
-  text-align: center;
-  font-size: 1.1rem;
-}
-#userBalance { font-weight: bold; color: #fca311; }
+#clock { font-family: 'Roboto Mono', monospace; font-size: 4rem; text-shadow: 0 0 15px #fca311; text-align: center; }
+.balance-box { background-color: rgba(255,255,255,0.05); border:1px solid #fca311; border-radius:10px; padding:0.8rem; max-width:320px; margin:0 auto 2rem auto; text-align:center; font-size:1.1rem; }
+#userBalance { font-weight: bold; color:#fca311; }
 
 /* --- Lottery Sections --- */
-.lottery-container {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  padding: 1rem;
-  margin-bottom: 3rem;
-}
-.number-section {
-  background-color: #162447;
-  padding: 1.2rem;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-  flex-basis: 280px;
-  flex-grow: 1;
-  text-align: center;
-  border: 1px solid #3a3a5e;
-  max-width: 350px;
-}
-.scroll-container {
-  background-color: #000;
-  border: 2px solid #fca311;
-  border-radius: 10px;
-  height: 90px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Roboto Mono', monospace;
-  font-size: 3.5rem;
-  color: #4caf50;
-  text-shadow: 0 0 8px #4caf50;
-}
+.lottery-container { display:flex; justify-content:center; gap:1.5rem; flex-wrap:wrap; padding:1rem; margin-bottom:3rem; }
+.number-section { background-color:#162447; padding:1.2rem; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.4); flex-basis:280px; flex-grow:1; text-align:center; border:1px solid #3a3a5e; max-width:350px; }
+.scroll-container { background-color:#000; border:2px solid #fca311; border-radius:10px; height:90px; overflow:hidden; display:flex; align-items:center; justify-content:center; font-family:'Roboto Mono', monospace; font-size:3.5rem; color:#4caf50; text-shadow:0 0 8px #4caf50; }
 
 /* --- Result History --- */
-.history-container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 1.5rem;
-  background-color: #162447;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-}
-#resultHistory {
-  list-style-type: none;
-  max-height: 280px;
-  overflow-y: auto;
-  padding-right: 8px;
-}
-#resultHistory li {
-  padding: 0.7rem;
-  border-bottom: 1px solid #3a3a5e;
-}
-#resultHistory li:last-child { border-bottom: none; }
-#resultHistory li:nth-child(even) { background-color: rgba(26,26,46,0.7); }
-#resultHistory::-webkit-scrollbar { width: 7px; }
-#resultHistory::-webkit-scrollbar-track { background: #1a1a2e; }
-#resultHistory::-webkit-scrollbar-thumb { background-color: #fca311; border-radius: 10px; }
+.history-container { max-width:600px; margin:2rem auto; padding:1.5rem; background-color:#162447; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.4); }
+#resultHistory { list-style-type:none; max-height:280px; overflow-y:auto; padding-right:8px; }
+#resultHistory li { padding:0.7rem; border-bottom:1px solid #3a3a5e; }
+#resultHistory li:last-child { border-bottom:none; }
+#resultHistory li:nth-child(even) { background-color:rgba(26,26,46,0.7); }
+#resultHistory::-webkit-scrollbar { width:7px; }
+#resultHistory::-webkit-scrollbar-track { background:#1a1a2e; }
+#resultHistory::-webkit-scrollbar-thumb { background-color:#fca311; border-radius:10px; }
 
 /* --- Responsive --- */
 @media (max-width: 768px) {
-  #clock { font-size: 2.8rem; }
-  .lottery-container { flex-direction: column; align-items: center; gap: 1rem; }
-  .number-section { width: 95%; max-width: 380px; }
-  .header-nav a { font-size: 0.95rem; padding: 6px 12px; }
+  #clock { font-size:2.8rem; }
+  .lottery-container { flex-direction:column; align-items:center; gap:1rem; }
+  .number-section { width:95%; max-width:380px; }
+  .nav-left a { margin-right:5px; font-size:0.95rem; padding:6px 10px; }
+  #menu-toggle { font-size:1.4rem; }
+  .menu-links { top:35px; right:0; min-width:120px; }
 }
-
 @media (max-width: 480px) {
-  #clock { font-size: 2.2rem; }
-  .scroll-container { font-size: 2.5rem; height: 70px; }
+  #clock { font-size:2.2rem; }
+  .scroll-container { font-size:2.5rem; height:70px; }
 }
