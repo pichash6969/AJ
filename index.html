@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lottery - Home</title>
+  <title>Virtual Lottery</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,7 +25,6 @@
       </div>
     </nav>
 
-    <!-- Virtual Lottery Title -->
     <h1 class="lottery-title">🎰 Virtual Lottery 🎰</h1>
   </header>
 
@@ -36,13 +35,12 @@
 
   <!-- Balance -->
   <div class="balance-box">
-    Balance: <span id="userBalance">0</span> coins
+    Balance: <span id="userBalance">1000</span> coins
   </div>
 
   <!-- Lottery Sections -->
   <div class="lottery-container">
 
-    <!-- 1-Digit -->
     <div class="number-section">
       <h3>1 To 10x</h3>
       <div class="scroll-container">
@@ -50,7 +48,6 @@
       </div>
     </div>
 
-    <!-- 2-Digit -->
     <div class="number-section">
       <h3>1 To 100x</h3>
       <div class="scroll-container">
@@ -58,7 +55,6 @@
       </div>
     </div>
 
-    <!-- 3-Digit -->
     <div class="number-section">
       <h3>1 To 1000x</h3>
       <div class="scroll-container">
@@ -80,11 +76,7 @@
   <script>
     const menuToggle = document.getElementById('menu-toggle');
     const menuLinks = document.getElementById('menu-links');
-
-    menuToggle.addEventListener('click', () => {
-      menuLinks.classList.toggle('show');
-    });
+    menuToggle.addEventListener('click', () => menuLinks.classList.toggle('show'));
   </script>
-
 </body>
 </html>
