@@ -13,6 +13,7 @@ body {
   background-color: #1a1a2e; /* गहरा नीला बैकग्राउंड */
   color: #e0e0e0; /* हल्का टेक्स्ट रंग */
   line-height: 1.6;
+  padding: 0 10px;
 }
 
 h1, h2, h3 {
@@ -23,51 +24,55 @@ h1, h2, h3 {
 
 /* --- नेविगेशन बार (Menu) --- */
 nav {
-  background-color: #162447; /* थोड़ा हल्का नीला */
-  padding: 1rem 0;
+  background-color: #162447;
+  padding: 1rem 0.5rem;
   display: flex;
   justify-content: center;
-  gap: 25px; /* लिंक के बीच में जगह */
+  flex-wrap: wrap; /* मोबाइल पर लाइन ब्रेक */
+  gap: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   margin-bottom: 2rem;
+  border-radius: 8px;
 }
 
 nav a {
   color: #ffffff;
   text-decoration: none;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
-  padding: 8px 16px;
-  border-radius: 5px;
+  padding: 8px 14px;
+  border-radius: 6px;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  white-space: nowrap;
 }
 
 nav a:hover {
   background-color: #fca311;
-  color: #162447; /* Hover पर टेक्स्ट का रंग */
-  transform: translateY(-2px); /* थोड़ा ऊपर उठने का इफेक्ट */
+  color: #162447;
+  transform: translateY(-2px);
 }
 
 /* --- घड़ी और बैलेंस सेक्शन --- */
 .clock-container {
-  margin: 2rem 0;
+  margin: 1.5rem 0;
 }
 
 #clock {
-  font-family: 'Roboto Mono', monospace; /* डिजिटल घड़ी जैसा फॉन्ट */
-  font-size: 4.5rem;
-  text-shadow: 0 0 15px #fca311; /* चमकने वाला इफेक्ट */
+  font-family: 'Roboto Mono', monospace;
+  font-size: 4rem;
+  text-shadow: 0 0 15px #fca311;
+  text-align: center;
 }
 
 .balance-box {
   background-color: rgba(255, 255, 255, 0.05);
   border: 1px solid #fca311;
   border-radius: 10px;
-  padding: 1rem;
-  max-width: 300px;
+  padding: 0.8rem;
+  max-width: 320px;
   margin: 0 auto 2rem auto;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 #userBalance {
@@ -79,64 +84,78 @@ nav a:hover {
 .lottery-container {
   display: flex;
   justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap; /* छोटी स्क्रीन पर सेक्शन को नीचे ले आएगा */
+  gap: 1.5rem;
+  flex-wrap: wrap;
   padding: 1rem;
   margin-bottom: 3rem;
 }
 
 .lottery-container h2 {
   width: 100%;
-  font-size: 2.5rem;
-  letter-spacing: 3px;
+  font-size: 2.2rem;
+  letter-spacing: 2px;
 }
 
 .number-section {
   background-color: #162447;
-  padding: 1.5rem;
+  padding: 1.2rem;
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-  flex-basis: 300px; /* हर सेक्शन की शुरुआती चौड़ाई */
+  flex-basis: 280px;
   flex-grow: 1;
   text-align: center;
   border: 1px solid #3a3a5e;
+  max-width: 350px;
 }
 
 .scroll-container {
   background-color: #000;
   border: 2px solid #fca311;
   border-radius: 10px;
-  height: 100px; /* नंबर दिखने वाली विंडो की ऊंचाई */
-  overflow: hidden; /* यह स्क्रॉलिंग इफेक्ट के लिए जरूरी है */
+  height: 90px;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Roboto Mono', monospace;
-  font-size: 4rem;
-  color: #4caf50; /* डिजिटल हरा रंग */
-  text-shadow: 0 0 8px #4caf50; /* चमकने वाला इफेक्ट */
+  font-size: 3.5rem;
+  color: #4caf50;
+  text-shadow: 0 0 8px #4caf50;
 }
 
 /* --- रिजल्ट हिस्ट्री --- */
 .history-container {
   max-width: 600px;
   margin: 2rem auto;
-  padding: 2rem;
+  padding: 1.5rem;
   background-color: #162447;
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
 
 #resultHistory {
-  list-style-type: none; /* बुलेट पॉइंट्स हटाएं */
-  max-height: 300px; /* अधिकतम ऊंचाई */
-  overflow-y: auto; /* जरूरत पड़ने पर स्क्रॉलबार दिखाएं */
-  padding-right: 10px;
+  list-style-type: none;
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 8px;
 }
 
-/* --- कस्टम स्क्रॉलबार स्टाइल --- */
+#resultHistory li {
+  padding: 0.7rem;
+  border-bottom: 1px solid #3a3a5e;
+}
+
+#resultHistory li:last-child {
+  border-bottom: none;
+}
+
+#resultHistory li:nth-child(even) {
+  background-color: rgba(26, 26, 46, 0.7);
+}
+
+/* --- कस्टम स्क्रॉलबार --- */
 #resultHistory::-webkit-scrollbar {
-  width: 8px;
+  width: 7px;
 }
 #resultHistory::-webkit-scrollbar-track {
   background: #1a1a2e;
@@ -146,38 +165,51 @@ nav a:hover {
   border-radius: 10px;
 }
 
-#resultHistory li {
-  padding: 0.8rem;
-  border-bottom: 1px solid #3a3a5e;
-}
-
-#resultHistory li:last-child {
-  border-bottom: none;
-}
-
-#resultHistory li:nth-child(even) {
-  background-color: rgba(26, 26, 46, 0.7); /* एक छोड़कर दूसरा रंग */
-}
-
-/* --- Responsive Design (मोबाइल और छोटी स्क्रीन के लिए) --- */
+/* --- Responsive Design --- */
 @media (max-width: 768px) {
   #clock {
-    font-size: 3rem;
+    font-size: 2.8rem;
   }
 
   .lottery-container {
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
   }
 
   .number-section {
-    width: 90%;
-    max-width: 400px;
+    width: 95%;
+    max-width: 380px;
   }
 
   nav {
-    flex-direction: column;
-    align-items: center;
     gap: 10px;
+    padding: 0.8rem;
+  }
+
+  nav a {
+    font-size: 0.95rem;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  nav a {
+    width: 100%;
+    text-align: center;
+  }
+
+  #clock {
+    font-size: 2.2rem;
+  }
+
+  .scroll-container {
+    font-size: 2.5rem;
+    height: 70px;
   }
 }
