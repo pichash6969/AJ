@@ -8,18 +8,25 @@
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- Header + Navbar -->
   <header class="site-header">
     <nav class="header-nav">
-      <a href="index.html">🏠 Home</a>
-      <a href="betting.html">🎲 Betting</a>
-      <a href="login.html">🔑 Login/Signup</a>
-      <a href="balance.html">💰 Balance</a>
-      <a href="history.html">📜 History</a>
+      <div class="nav-left">
+        <a href="index.html">🏠 Home</a>
+        <a href="betting.html">🎲 Betting</a>
+      </div>
+      <div class="hamburger-menu">
+        <button id="menu-toggle">☰</button>
+        <div class="menu-links" id="menu-links">
+          <a href="login.html">🔑 Login/Signup</a>
+          <a href="balance.html">💰 Balance</a>
+          <a href="history.html">📜 History</a>
+        </div>
+      </div>
     </nav>
 
     <!-- Virtual Lottery Title -->
-    <h1 class="lottery-title">🎰 Lucky Number umber 🎰</h1>
+    <h1 class="lottery-title">🎰 Virtual Lottery 🎰</h1>
   </header>
 
   <!-- Clock -->
@@ -70,6 +77,14 @@
   <!-- JS -->
   <script src="common.js"></script>
   <script src="script.js"></script>
+  <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuLinks = document.getElementById('menu-links');
+
+    menuToggle.addEventListener('click', () => {
+      menuLinks.classList.toggle('show');
+    });
+  </script>
 
 </body>
 </html>
