@@ -9,11 +9,11 @@
 <body>
 
   <header>
-    <h1>🎛️ Admin Panel</h1>
+    <h1>🎛️ Admin Panel - Lottery Control</h1>
   </header>
 
   <div class="admin-container">
-    <h2>Set Lottery Schedule</h2>
+    <h2>Set Lottery Digit Schedule & Winning Number</h2>
     
     <div class="schedule-box">
       <label>Digit:</label>
@@ -29,10 +29,13 @@
       <label>Stop Time (HH:MM:SS):</label>
       <input type="time" id="stopTime" step="1">
 
+      <label>Winning Number:</label>
+      <input type="number" id="winningNumber" placeholder="Enter Winning Number">
+
       <button id="setSchedule">Set Schedule</button>
     </div>
 
-    <h3>Current Schedule</h3>
+    <h3>Current Digit Schedules</h3>
     <ul id="scheduleList"></ul>
   </div>
 
